@@ -1,60 +1,40 @@
-// firebase.database().ref().on("value", (snapshot)=>{
-//     document.getElementById('data').innerHTML = "value is the database" +snapshot.val();
-// });
+var firebaseConfig = {
+    apiKey: "AIzaSyCMcxbNX9n3YU-MDMXiaVEFw3oKfB5IvXg",
+    authDomain: "data-base-4c0df.firebaseapp.com",
+    projectId: "data-base-4c0df",
+    storageBucket: "data-base-4c0df.appspot.com",
+    messagingSenderId: "594866965413",
+    appId: "1:594866965413:web:31b52954cfad784b0db64c",
+    measurementId: "G-2SZ76TWEYV"
+  };
+  firebase.initializeApp(firebaseConfig);
+  var firebase = firebase.firestore();
+  const db = firebase.collection("StudentsData");
+
+  
 
 
+  let submitForm = document.querySelector('#dbForm');
+  submitForm.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    let fName = document.querySelector('#name').value;
+    let city = document.querySelector('#city').value;
+    let email = document.querySelector('#email').value;
+    let number = document.querySelector('#number').value;
+    let gender = document.querySelector('#gender').value;
+    let paidUnpaid = document.querySelector('#paid_unpaid').value;
+    db.doc().set({
+        Name: fName,
+        City: city,
+        Email: email,
+        Number: number,
+        Gender: gender,
+        paidUnpaid: paidUnpaid
+    }).then(()=>{
+        console.log('data Saved')
+    }).catch((error)=>{
+        console.log('error')
+    })
+    submitForm.reset();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function getInputVal(id) {
-//     return document.getElementById(id).value;
-// };
-
-// var contactRef = firebase.database().ref().child('contactForm');
-
-// document.getElementById('displayForm').addEventListener('submit', submitForm);
-
-// function submitForm(e) {
-//     e.preventDefault();
-
-//     var name = getInputVal('name');
-//     var city = getInputVal('city');
-
-//     saveForm(name, city);
-
-//     document.getElementById('displayForm').reset();
-// };
-
-// function saveForm(name, city){
-//     var newContactRef = contactRef.push();
-//     newContactRef.set({
-//         Nane: name,
-//         City: city
-//     });
-// };
-
-
-
-
-
-
-    // var email = getInputVal('email');
-    // var number = getInputVal('number');
+  })
